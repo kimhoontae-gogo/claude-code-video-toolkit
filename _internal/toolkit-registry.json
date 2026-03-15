@@ -1,6 +1,6 @@
 {
   "name": "claude-code-video-toolkit",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "AI-native video production workspace for Claude Code",
   "repository": "https://github.com/digitalsamba/claude-code-video-toolkit",
 
@@ -309,6 +309,30 @@
       "requires": "ffprobe (from ffmpeg)",
       "created": "2026-02-24",
       "updated": "2026-02-24"
+    },
+    "flux2": {
+      "path": "tools/flux2.py",
+      "description": "AI image generation and editing using FLUX.2 Klein 4B - text-to-image, image editing, and scene presets",
+      "usage": "python tools/flux2.py --preset title-bg --brand digital-samba",
+      "status": "beta",
+      "category": "image-generation",
+      "backend": "flux2-klein-4b",
+      "requires": "RunPod account",
+      "options": {
+        "modes": ["generate", "edit"],
+        "presets": ["title-bg", "problem", "solution", "demo-bg", "stats-bg", "cta", "thumbnail", "portrait-bg"],
+        "brand": true,
+        "width": [512, 768, 1024, 1280, 1920],
+        "height": [512, 768, 1024, 1080, 1280],
+        "steps": "4 (fast) to 50 (quality)",
+        "guidance": "1.0 (fast) to 4.0 (quality)",
+        "seed": true,
+        "multiImage": true
+      },
+      "envVars": ["RUNPOD_API_KEY", "RUNPOD_FLUX2_ENDPOINT_ID"],
+      "estimatedCost": "$0.01-0.03 per image",
+      "created": "2026-03-14",
+      "updated": "2026-03-15"
     }
   },
 
@@ -371,10 +395,17 @@
           "envVar": "RUNPOD_QWEN3_TTS_ENDPOINT_ID",
           "operations": ["qwen3_tts"],
           "estimatedCost": "$0.005-0.10 per generation"
+        },
+        "flux2": {
+          "image": "ghcr.io/conalmullan/video-toolkit-flux2:latest",
+          "dockerfile": "docker/runpod-flux2/",
+          "envVar": "RUNPOD_FLUX2_ENDPOINT_ID",
+          "operations": ["flux2"],
+          "estimatedCost": "$0.01-0.03 per image"
         }
       },
       "created": "2025-12-30",
-      "updated": "2026-01-12"
+      "updated": "2026-03-14"
     }
   },
 
@@ -561,6 +592,14 @@
       "template": "sprint-review",
       "complexity": "intermediate",
       "contributor": "Digital Samba"
+    },
+    "the-space-between": {
+      "path": "examples/the-space-between/",
+      "description": "AI-generated video essay — flux2 avatar, Qwen3-TTS voice, SadTalker animation",
+      "template": "custom",
+      "complexity": "advanced",
+      "demo": "https://demos.digitalsamba.com/video/the-space-between.mp4",
+      "created": "2026-03-15"
     }
   },
 

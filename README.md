@@ -22,6 +22,7 @@ An AI-native video production workspace for [Claude Code](https://claude.ai/code
 > - `ghcr.io/conalmullan/video-toolkit-propainter` — Video watermark removal (ProPainter)
 > - `ghcr.io/conalmullan/video-toolkit-sadtalker` — Talking head generation (SadTalker)
 > - `ghcr.io/conalmullan/video-toolkit-qwen3-tts` — Text-to-speech (Qwen3-TTS)
+> - `ghcr.io/conalmullan/video-toolkit-flux2` — Text-to-image & editing (FLUX.2 Klein 4B)
 >
 > My motto: **Be brave. Experiment.** And please share any videos you create or ideas you have back with the project — it helps me keep improving this toolkit for everyone.
 
@@ -149,6 +150,7 @@ See `examples/` for finished projects you can learn from (oldest first, showing 
 | 2026-01-22 | [ds-remote-mcp](https://demos.digitalsamba.com/video/ds-remote-mcp.mp4) | Remote MCP server demo *(the jazz background music is a joke)* |
 | 2026-01-25 | [schlumbergera](https://demos.digitalsamba.com/video/schlumbergera.mp4) | Android sprint review video |
 | 2026-02-23 | [cortina](https://demos.digitalsamba.com/video/sprint-review.mp4) | Mobile platforms sprint review |
+| 2026-03-15 | [the-space-between](https://demos.digitalsamba.com/video/the-space-between.mp4) | AI-generated video essay — flux2 avatar, Qwen3-TTS voice, SadTalker animation |
 
 ### Scene Transitions
 
@@ -250,6 +252,12 @@ python tools/locate_watermark.py --input video.mp4 --grid --output-dir ./review/
 # Creates animated presenter/narrator from a static portrait + voiceover audio
 # Use with NarratorPiP component for picture-in-picture presenter overlays
 python tools/sadtalker.py --image portrait.png --audio voiceover.mp3 --output talking.mp4
+
+# AI image generation (FLUX.2 Klein 4B — text-to-image + editing)
+python tools/flux2.py --prompt "A sunset over mountains"
+python tools/flux2.py --preset title-bg --brand digital-samba
+python tools/flux2.py --input photo.jpg --prompt "Add sunglasses"
+python tools/flux2.py --list-presets
 ```
 
 **Tool Categories:**
@@ -258,7 +266,7 @@ python tools/sadtalker.py --image portrait.png --audio voiceover.mp3 --output ta
 |------|-------|---------|
 | **Project** | voiceover, music, sfx | Used during video creation workflow |
 | **Utility** | redub, addmusic, notebooklm_brand, locate_watermark | Quick transformations, no project needed |
-| **Cloud GPU** | image_edit, upscale, dewatermark, sadtalker, qwen3_tts | AI processing via RunPod (see below) |
+| **Cloud GPU** | image_edit, upscale, dewatermark, sadtalker, qwen3_tts, flux2 | AI processing via RunPod (see below) |
 
 See [docs/runpod-setup.md](docs/runpod-setup.md) for Cloud GPU tool setup.
 
@@ -273,6 +281,7 @@ Cloud GPU tools use pre-built Docker images deployed to RunPod serverless:
 | dewatermark | `ghcr.io/conalmullan/video-toolkit-propainter:latest` | 24GB (RTX 3090/4090) |
 | sadtalker | `ghcr.io/conalmullan/video-toolkit-sadtalker:latest` | 24GB (RTX 4090) |
 | qwen3_tts | `ghcr.io/conalmullan/video-toolkit-qwen3-tts:latest` | 24GB (ADA) |
+| flux2 | `ghcr.io/conalmullan/video-toolkit-flux2:latest` | 24GB (ADA) |
 
 Dockerfiles and handlers are in `docker/`. Run `python tools/<tool>.py --setup` to auto-deploy.
 

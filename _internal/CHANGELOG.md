@@ -6,6 +6,32 @@ All notable changes to claude-code-video-toolkit.
 
 ---
 
+## 2026-03-15 (v0.11.0)
+
+### Added
+- **`tools/flux2.py`** — AI image generation and editing using FLUX.2 Klein 4B
+  - Text-to-image generation from prompts (~2.5s fast mode, ~8s quality mode)
+  - Image editing with reference images (`--input photo.jpg --prompt "..."`)
+  - Multi-image compositing (up to 3 reference images)
+  - **8 scene presets** for video production: `title-bg`, `problem`, `solution`, `demo-bg`, `stats-bg`, `cta`, `thumbnail`, `portrait-bg`
+  - **Brand-aware generation** — `--brand digital-samba` reads brand.json and injects color palette into prompts
+  - Preset + prompt layering — preset provides style/mood, `--prompt` adds subject context
+  - `--setup` creates RunPod template + endpoint via GraphQL
+  - `--list-presets` shows all available scene presets
+  - Docker image: `ghcr.io/conalmullan/video-toolkit-flux2:latest` (baked model weights, ~15GB)
+  - Apache 2.0 licensed model (commercial OK)
+- **"The Space Between"** — [showcase video](https://demos.digitalsamba.com/video/the-space-between.mp4) demonstrating end-to-end AI video creation
+  - Avatar generated with flux2, voiced with Qwen3-TTS, animated with SadTalker, composed in Remotion
+  - Concept, script, voice, visuals — all AI-generated
+  - New video format: video essay (beyond sprint reviews and product demos)
+
+### Changed
+- **Baked Docker images rebuilt** — both `flux2` and `qwen3-tts` images now include model weights baked in, eliminating cold-start model downloads (~30s cold start vs minutes)
+- Updated `_internal/toolkit-registry.json` with flux2 tool entry, cloud endpoint, scene presets, and showcase example
+- Updated README with flux2 tool, Docker image, demo table entry, and Cloud GPU tools table
+
+---
+
 ## 2026-02-25 (v0.10.1)
 
 ### Added

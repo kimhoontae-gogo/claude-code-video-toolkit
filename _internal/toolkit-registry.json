@@ -170,6 +170,30 @@
       "created": "2025-12-08",
       "updated": "2025-12-08"
     },
+    "music_gen": {
+      "path": "tools/music_gen.py",
+      "description": "AI music generation using ACE-Step 1.5 (text-to-music, cover, stem extraction)",
+      "usage": "python tools/music_gen.py --prompt 'Upbeat tech' --duration 60 --bpm 128 --output music.mp3",
+      "status": "beta",
+      "options": {
+        "prompt": "Music description",
+        "lyrics": "Song lyrics (enables vocals)",
+        "duration": "Duration in seconds (10-600)",
+        "bpm": "Tempo (30-300)",
+        "key": "Musical key (e.g., 'C Major', 'Am')",
+        "time-sig": "Time signature (2, 3, 4, 6)",
+        "preset": "Scene preset (corporate-bg, upbeat-tech, ambient, dramatic, tension, hopeful, cta, lofi)",
+        "brand": "Brand name for style hints",
+        "cover": "Cover/style transfer mode (requires --reference)",
+        "extract": "Stem extraction (vocals, drums, bass, guitar, piano, other)",
+        "format": "Audio format: mp3, wav, flac",
+        "steps": "Inference steps (default: 8 for turbo)"
+      },
+      "presets": ["corporate-bg", "upbeat-tech", "ambient", "dramatic", "tension", "hopeful", "cta", "lofi"],
+      "envVars": ["RUNPOD_API_KEY", "RUNPOD_ACESTEP_ENDPOINT_ID"],
+      "created": "2026-03-22",
+      "updated": "2026-03-22"
+    },
     "sfx": {
       "path": "tools/sfx.py",
       "description": "Generate sound effects using ElevenLabs",
@@ -402,6 +426,13 @@
           "envVar": "RUNPOD_FLUX2_ENDPOINT_ID",
           "operations": ["flux2"],
           "estimatedCost": "$0.01-0.03 per image"
+        },
+        "acestep": {
+          "image": "ghcr.io/conalmullan/video-toolkit-acestep:latest",
+          "dockerfile": "docker/runpod-acestep/",
+          "envVar": "RUNPOD_ACESTEP_ENDPOINT_ID",
+          "operations": ["music_gen"],
+          "estimatedCost": "$0.01-0.05 per track"
         }
       },
       "created": "2025-12-30",

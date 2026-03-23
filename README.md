@@ -47,7 +47,7 @@ Then in Claude Code:
 >
 > **If you're getting started**, run `/setup` then `/video` and let Claude Code guide you. Or start with `/template` to create a template for your own use case.
 >
-> **Cloud GPU** — I recommend [Modal](https://modal.com/) for running the toolkit's AI tools. The Starter plan gives you $30/month free compute, which is more than enough. [RunPod](https://runpod.io/) is also supported as an alternative. All 7 Docker images are public — `/setup` will deploy them for you.
+> **Cloud GPU** — I recommend [Modal](https://modal.com/) for running the toolkit's AI tools. The Starter plan gives you $30/month free compute, which is more than enough. [RunPod](https://runpod.io/) is also supported as an alternative. Run `/setup` to deploy the tools you need.
 >
 > My motto: **Be brave. Experiment.** And please share any videos you create or ideas you have back with the project — it helps me keep improving this toolkit for everyone.
 
@@ -226,21 +226,21 @@ python tools/flux2.py --list-presets
 
 ### Cloud GPU (Modal + RunPod)
 
-Cloud GPU tools support two providers. Use `--cloud modal` or `--cloud runpod` on any tool.
+7 AI tools run on cloud GPUs. Use `--cloud modal` (recommended) or `--cloud runpod` on any tool.
 
-| Tool | Docker Image | What It Does |
-|------|--------------|--------------|
-| qwen3_tts | `ghcr.io/conalmullan/video-toolkit-qwen3-tts` | AI text-to-speech |
-| flux2 | `ghcr.io/conalmullan/video-toolkit-flux2` | AI image generation & editing |
-| image_edit | `ghcr.io/conalmullan/video-toolkit-qwen-edit` | AI image editing & style transfer |
-| upscale | `ghcr.io/conalmullan/video-toolkit-realesrgan` | AI image upscaling (2x/4x) |
-| music_gen | `ghcr.io/conalmullan/video-toolkit-acestep` | AI music generation |
-| sadtalker | `ghcr.io/conalmullan/video-toolkit-sadtalker` | Talking head video |
-| dewatermark | `ghcr.io/conalmullan/video-toolkit-propainter` | Video watermark removal |
+| Tool | What It Does | Est. Cost |
+|------|--------------|-----------|
+| `qwen3_tts` | AI text-to-speech (9 speakers, voice cloning) | ~$0.01 |
+| `flux2` | AI image generation & editing | ~$0.02 |
+| `image_edit` | AI image editing & style transfer | ~$0.03 |
+| `upscale` | AI image upscaling (2x/4x) | ~$0.01 |
+| `music_gen` | AI music generation (8 scene presets) | ~$0.05 |
+| `sadtalker` | Talking head video from portrait + audio | ~$0.10 |
+| `dewatermark` | Video watermark removal | ~$0.10 |
 
-All images are public. `/setup` deploys them to your cloud account automatically.
+**Modal (recommended):** Each tool deploys from `docker/modal-*/app.py` — Modal builds and hosts the containers. $30/month free compute on the Starter plan, typical usage is $1-2/month. Run `/setup` to deploy all tools automatically.
 
-**Cost:** Modal Starter plan includes $30/month free compute. Typical toolkit usage is $1-2/month. RunPod is pay-per-second with no minimums (~$0.01-0.15 per job).
+**RunPod (alternative):** Uses pre-built Docker images from `ghcr.io/conalmullan/video-toolkit-*`. Pay-per-second, no minimums. Run `python3 tools/<tool>.py --setup` to create endpoints.
 
 See [docs/modal-setup.md](docs/modal-setup.md) and [docs/runpod-setup.md](docs/runpod-setup.md) for details.
 

@@ -128,8 +128,9 @@ An open-source, AI-native video production workspace for Claude Code, featuring:
 - [x] `docker/modal-image-edit/app.py` — deployed, tested
 - [x] `docker/modal-music-gen/app.py` — deployed, tested
 - [x] `docker/modal-sadtalker/app.py` — deployed, tested
-- [x] `--runpod` deprecated in upscale.py (alias for `--cloud runpod`)
+- [x] `--runpod` deprecated in upscale.py and dewatermark.py (alias for `--cloud runpod`)
 - [x] `voiceover.py` passes `--cloud` through to Qwen3-TTS
+- [x] `dewatermark.py` migrated to `cloud_gpu.py` (removed ~393 lines of inline RunPod code)
 - [ ] `docs/modal-setup.md` — setup guide for Modal deployment
 - [ ] Add `--setup --cloud modal` to tools (currently manual `modal deploy`)
 
@@ -220,7 +221,7 @@ An open-source, AI-native video production workspace for Claude Code, featuring:
 | Brands | 2 | default, digital-samba |
 | Skills | 8 | 6 stable, 2 beta |
 | Tools | 12 | voiceover, music, sfx, redub, addmusic, dewatermark, locate_watermark, notebooklm_brand, image_edit, upscale, sadtalker, qwen3_tts |
-| Commands | 12 | video, brand, template, skills, contribute, record-demo, generate-voiceover, scene-review, design, versions, redub, voice-clone |
+| Commands | 13 | setup, video, brand, template, skills, contribute, record-demo, generate-voiceover, scene-review, design, versions, redub, voice-clone |
 | Components | 11 | AnimatedBackground, SlideTransition, Label, Vignette, FilmGrain, LogoWatermark, SplitScreen, NarratorPiP, Envelope, PointingHand, MazeDecoration |
 | Transitions | 7 | glitch, rgbSplit, zoomBlur, lightLeak, clockWipe, pixelate, checkerboard |
 | Examples | 3 | hello-world, digital-samba-skill-demo, sprint-review-cho-oyu |

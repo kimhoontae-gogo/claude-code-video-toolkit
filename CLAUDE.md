@@ -39,6 +39,13 @@ claude-code-video-toolkit/
 
 ## Quick Start
 
+**First-time setup (optional, ~5 minutes):**
+```
+/setup
+```
+
+Walks through cloud GPU, file transfer (R2), and voice configuration. Most features are free. Skip this if you just want to render videos with Node.js.
+
 **Work on a video project:**
 ```
 /video

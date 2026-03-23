@@ -39,6 +39,7 @@ _MODAL_ENV_VARS = {
     "sadtalker": "MODAL_SADTALKER_ENDPOINT_URL",
     "image_edit": "MODAL_IMAGE_EDIT_ENDPOINT_URL",
     "music_gen": "MODAL_MUSIC_GEN_ENDPOINT_URL",
+    "dewatermark": "MODAL_DEWATERMARK_ENDPOINT_URL",
 }
 
 
@@ -96,6 +97,7 @@ _TOOL_GPU = {
         "sadtalker": "A10G",
         "image_edit": "A10G",
         "music_gen": "A10G",
+        "dewatermark": "A10G",
     },
     "runpod": {
         "qwen3_tts": "ADA_24",
@@ -104,6 +106,7 @@ _TOOL_GPU = {
         "sadtalker": "AMPERE_24",
         "image_edit": "AMPERE_80",
         "music_gen": "AMPERE_24",
+        "dewatermark": "AMPERE_24",
     },
 }
 

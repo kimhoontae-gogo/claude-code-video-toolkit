@@ -68,17 +68,24 @@ npm run render    # Outputs MP4 — no API keys needed
 git clone https://github.com/digitalsamba/claude-code-video-toolkit.git
 cd claude-code-video-toolkit
 
-# Set up environment (all keys are optional)
-cp .env.example .env
-
 # Install Python dependencies (optional — only needed for AI tools)
 python -m venv .venv
 source .venv/bin/activate
 pip install -r tools/requirements.txt
 
-# Start Claude Code
+# Start Claude Code and run the setup wizard
 claude
 ```
+
+### Set Up AI Tools (optional, ~5 minutes)
+
+In Claude Code, run:
+
+```
+/setup
+```
+
+This walks you through configuring cloud GPU, file transfer, and voice. Most features are free (Cloudflare R2 free tier, Modal $30/mo free compute, Qwen3-TTS free voiceovers).
 
 ### Create Your First Video
 

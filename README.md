@@ -2,7 +2,40 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/digitalsamba/claude-code-video-toolkit)](https://github.com/digitalsamba/claude-code-video-toolkit/releases)
 
-An AI-native video production workspace for [Claude Code](https://claude.ai/code). Create professional videos with AI assistance — from concept to final render.
+An AI-native video production workspace for [Claude Code](https://claude.ai/code). Skills, commands, templates, and tools that give Claude Code everything it needs to help you create professional videos — from concept to final render.
+
+## Quick Start
+
+```bash
+git clone https://github.com/digitalsamba/claude-code-video-toolkit.git
+cd claude-code-video-toolkit
+pip install -r tools/requirements.txt   # Optional: for AI voiceover, image gen, music
+claude                                   # Open Claude Code in the toolkit
+```
+
+Then in Claude Code:
+
+```
+/setup                    # Configure cloud GPU, storage, voice (~5 min, mostly free)
+/video                    # Create your first video
+```
+
+**That's it.** `/setup` walks you through everything interactively — cloud GPU provider, file transfer, voice config. `/video` creates a project from a template and guides you through the whole workflow.
+
+**What's free:**
+- Cloudflare R2 — free file transfer (10GB storage, zero egress)
+- Modal — $30/month free compute on Starter plan (just add a card)
+- Qwen3-TTS — free AI voiceovers (runs on your Modal compute)
+
+**Requirements:** [Node.js](https://nodejs.org/) 18+ and [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Python 3.9+ recommended for AI tools. FFmpeg optional.
+
+> **Want to skip setup and just render something?**
+> ```bash
+> cd examples/hello-world && npm install && npm run render
+> ```
+> No API keys needed — outputs an MP4 immediately.
+
+---
 
 ## A Note from the Author *(not AI-generated)*
 
@@ -12,99 +45,11 @@ An AI-native video production workspace for [Claude Code](https://claude.ai/code
 >
 > What makes this work is that Claude Code is fantastically resourceful and flexible — give it the framing and tooling that this toolkit provides and it will adapt it to create templates and videos based on your prompting. The skills, templates, and tools here are building blocks. Claude Code is the builder. You are the director, editor, and designer.
 >
-> **If you're getting started**, I'd suggest beginning with the `/template` command and working through creating a template for your own use case.
+> **If you're getting started**, run `/setup` then `/video` and let Claude Code guide you. Or start with `/template` to create a template for your own use case.
 >
-> **I highly recommend a [RunPod](https://runpod.io/) account** for running open-source models with GPU resources. It's cheap — typically pennies per job, and rarely more than $10/month even with heavy use. I will likely make Qwen3-TTS the default for voiceovers as it arguably produces better results with significantly less effort and cost than ElevenLabs.
->
-> **Free Docker images** — I've made all the RunPod images I use in this project available publicly:
-> - `ghcr.io/conalmullan/video-toolkit-qwen-edit` — AI image editing (Qwen-Image-Edit)
-> - `ghcr.io/conalmullan/video-toolkit-realesrgan` — AI image upscaling (Real-ESRGAN)
-> - `ghcr.io/conalmullan/video-toolkit-propainter` — Video watermark removal (ProPainter)
-> - `ghcr.io/conalmullan/video-toolkit-sadtalker` — Talking head generation (SadTalker)
-> - `ghcr.io/conalmullan/video-toolkit-qwen3-tts` — Text-to-speech (Qwen3-TTS)
-> - `ghcr.io/conalmullan/video-toolkit-flux2` — Text-to-image & editing (FLUX.2 Klein 4B)
-> - `ghcr.io/conalmullan/video-toolkit-acestep` — AI music generation (ACE-Step 1.5)
+> **Cloud GPU** — I recommend [Modal](https://modal.com/) for running the toolkit's AI tools. The Starter plan gives you $30/month free compute, which is more than enough. [RunPod](https://runpod.io/) is also supported as an alternative. All 7 Docker images are public — `/setup` will deploy them for you.
 >
 > My motto: **Be brave. Experiment.** And please share any videos you create or ideas you have back with the project — it helps me keep improving this toolkit for everyone.
-
-## What is this?
-
-This toolkit gives Claude Code the knowledge and tools to help you create videos:
-
-- **Skills** — Domain expertise in Remotion, ElevenLabs, FFmpeg, Playwright
-- **Commands** — Guided workflows like `/video`, `/record-demo`, `/contribute`
-- **Templates** — Ready-to-customize video structures
-- **Brands** — Visual identity profiles (colors, fonts, voice settings)
-- **Tools** — Python CLI for audio generation
-
-Clone this repo, open it in Claude Code, and start creating videos.
-
-## Quick Start
-
-### Prerequisites
-
-| Requirement | Status | Purpose |
-|-------------|--------|---------|
-| [Node.js](https://nodejs.org/) 18+ | **Required** | Renders videos with Remotion |
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | **Required** | AI assistant for video creation |
-| [Python](https://python.org/) 3.9+ | Optional | AI voiceover, audio tools |
-| [FFmpeg](https://ffmpeg.org/) | Optional | Media conversion |
-| [RunPod account](https://runpod.io/) | Optional | Cloud GPU (TTS, image editing, music gen) |
-| [ElevenLabs API key](https://elevenlabs.io/) | Optional | Premium AI voices |
-
-### Try It Now
-
-```bash
-git clone https://github.com/digitalsamba/claude-code-video-toolkit.git
-cd claude-code-video-toolkit/examples/hello-world
-npm install
-npm run render    # Outputs MP4 — no API keys needed
-```
-
-### Full Setup
-
-```bash
-# Clone the toolkit
-git clone https://github.com/digitalsamba/claude-code-video-toolkit.git
-cd claude-code-video-toolkit
-
-# Install Python dependencies (optional — only needed for AI tools)
-python -m venv .venv
-source .venv/bin/activate
-pip install -r tools/requirements.txt
-
-# Start Claude Code and run the setup wizard
-claude
-```
-
-### Set Up AI Tools (optional, ~5 minutes)
-
-In Claude Code, run:
-
-```
-/setup
-```
-
-This walks you through configuring cloud GPU, file transfer, and voice. Most features are free (Cloudflare R2 free tier, Modal $30/mo free compute, Qwen3-TTS free voiceovers).
-
-### Create Your First Video
-
-In Claude Code, run:
-
-```
-/video
-```
-
-This will:
-1. Scan for existing projects (resume or create new)
-2. Choose template (sprint-review, product-demo)
-3. Choose brand (or create one with `/brand`)
-4. Plan scenes interactively
-5. Create project with VOICEOVER-SCRIPT.md
-
-**Multi-session support:** Projects span multiple sessions. Run `/video` to resume where you left off.
-
-Then iterate with Claude Code to record demos, refine content, and render.
 
 ## Features
 
@@ -127,6 +72,7 @@ Claude Code has deep knowledge in:
 
 | Command | Description |
 |---------|-------------|
+| `/setup` | First-time setup — cloud GPU, file transfer, voice, prerequisites |
 | `/video` | Video projects — list, resume, or create new |
 | `/scene-review` | Scene-by-scene review in Remotion Studio |
 | `/design` | Focused design refinement session for a scene |
@@ -249,27 +195,24 @@ python tools/addmusic.py --input video.mp4 --prompt "Subtle ambient" --output ou
 python tools/notebooklm_brand.py --input video.mp4 --logo logo.png --url "mysite.com" --output branded.mp4
 
 # AI image editing (style transfer, backgrounds, custom prompts)
-python tools/image_edit.py --input photo.jpg --style cyberpunk
-python tools/image_edit.py --input photo.jpg --prompt "Add sunglasses"
+python tools/image_edit.py --input photo.jpg --style cyberpunk --cloud modal
+python tools/image_edit.py --input photo.jpg --prompt "Add sunglasses" --cloud modal
 
 # AI image upscaling (2x/4x)
-python tools/upscale.py --input photo.jpg --output photo_4x.png --runpod
+python tools/upscale.py --input photo.jpg --output photo_4x.png --cloud modal
 
-# Remove watermarks (requires RunPod or NVIDIA GPU)
-python tools/dewatermark.py --input video.mp4 --preset sora --output clean.mp4 --runpod
+# Remove watermarks (requires cloud GPU)
+python tools/dewatermark.py --input video.mp4 --preset sora --output clean.mp4 --cloud modal
 
 # Locate watermark coordinates
 python tools/locate_watermark.py --input video.mp4 --grid --output-dir ./review/
 
 # Generate talking head video from image + audio (SadTalker)
-# Creates animated presenter/narrator from a static portrait + voiceover audio
-# Use with NarratorPiP component for picture-in-picture presenter overlays
-python tools/sadtalker.py --image portrait.png --audio voiceover.mp3 --output talking.mp4
+python tools/sadtalker.py --image portrait.png --audio voiceover.mp3 --output talking.mp4 --cloud modal
 
 # AI image generation (FLUX.2 Klein 4B — text-to-image + editing)
-python tools/flux2.py --prompt "A sunset over mountains"
-python tools/flux2.py --preset title-bg --brand digital-samba
-python tools/flux2.py --input photo.jpg --prompt "Add sunglasses"
+python tools/flux2.py --prompt "A sunset over mountains" --cloud modal
+python tools/flux2.py --preset title-bg --brand digital-samba --cloud modal
 python tools/flux2.py --list-presets
 ```
 
@@ -279,27 +222,27 @@ python tools/flux2.py --list-presets
 |------|-------|---------|
 | **Project** | voiceover, music, music_gen, sfx | Used during video creation workflow |
 | **Utility** | redub, addmusic, notebooklm_brand, locate_watermark | Quick transformations, no project needed |
-| **Cloud GPU** | image_edit, upscale, dewatermark, sadtalker, qwen3_tts, flux2, music_gen | AI processing via RunPod (see below) |
+| **Cloud GPU** | image_edit, upscale, dewatermark, sadtalker, qwen3_tts, flux2, music_gen | AI processing via Modal or RunPod |
 
-See [docs/runpod-setup.md](docs/runpod-setup.md) for Cloud GPU tool setup.
+### Cloud GPU (Modal + RunPod)
 
-### Pre-built Docker Images
+Cloud GPU tools support two providers. Use `--cloud modal` or `--cloud runpod` on any tool.
 
-Cloud GPU tools use pre-built Docker images deployed to RunPod serverless:
+| Tool | Docker Image | What It Does |
+|------|--------------|--------------|
+| qwen3_tts | `ghcr.io/conalmullan/video-toolkit-qwen3-tts` | AI text-to-speech |
+| flux2 | `ghcr.io/conalmullan/video-toolkit-flux2` | AI image generation & editing |
+| image_edit | `ghcr.io/conalmullan/video-toolkit-qwen-edit` | AI image editing & style transfer |
+| upscale | `ghcr.io/conalmullan/video-toolkit-realesrgan` | AI image upscaling (2x/4x) |
+| music_gen | `ghcr.io/conalmullan/video-toolkit-acestep` | AI music generation |
+| sadtalker | `ghcr.io/conalmullan/video-toolkit-sadtalker` | Talking head video |
+| dewatermark | `ghcr.io/conalmullan/video-toolkit-propainter` | Video watermark removal |
 
-| Tool | Docker Image | GPU |
-|------|--------------|-----|
-| image_edit | `ghcr.io/conalmullan/video-toolkit-qwen-edit:latest` | 48GB+ (A6000, L40S) |
-| upscale | `ghcr.io/conalmullan/video-toolkit-realesrgan:latest` | 24GB (RTX 3090/4090) |
-| dewatermark | `ghcr.io/conalmullan/video-toolkit-propainter:latest` | 24GB (RTX 3090/4090) |
-| sadtalker | `ghcr.io/conalmullan/video-toolkit-sadtalker:latest` | 24GB (RTX 4090) |
-| qwen3_tts | `ghcr.io/conalmullan/video-toolkit-qwen3-tts:latest` | 24GB (ADA) |
-| flux2 | `ghcr.io/conalmullan/video-toolkit-flux2:latest` | 24GB (ADA) |
-| music_gen | `ghcr.io/conalmullan/video-toolkit-acestep:latest` | 24GB+ (AMPERE/ADA) |
+All images are public. `/setup` deploys them to your cloud account automatically.
 
-Dockerfiles and handlers are in `docker/`. Run `python tools/<tool>.py --setup` to auto-deploy.
+**Cost:** Modal Starter plan includes $30/month free compute. Typical toolkit usage is $1-2/month. RunPod is pay-per-second with no minimums (~$0.01-0.15 per job).
 
-**Cost:** RunPod is pay-per-second with no minimums. Typical usage is ~$0.01-0.15 per job. Even with heavy experimenting, expect to spend less than $10/month.
+See [docs/modal-setup.md](docs/modal-setup.md) and [docs/runpod-setup.md](docs/runpod-setup.md) for details.
 
 ## Project Structure
 
@@ -327,12 +270,13 @@ claude-code-video-toolkit/
 ## Documentation
 
 - [Getting Started](docs/getting-started.md)
+- [Modal Setup](docs/modal-setup.md) — Cloud GPU with Modal (recommended)
+- [RunPod Setup](docs/runpod-setup.md) — Cloud GPU with RunPod (alternative)
 - [Creating Templates](docs/creating-templates.md)
 - [Creating Brands](docs/creating-brands.md)
 - [Project System](lib/project/README.md) — Multi-session lifecycle, schema, reconciliation
-- [Optional Components](docs/optional-components.md) — GPU tools setup (dewatermark)
-- [RunPod Setup](docs/runpod-setup.md) — Cloud GPU configuration
-- [Toolkit Development](_internal/ROADMAP.md) — Roadmap, backlog, changelog for the toolkit itself
+- [Optional Components](docs/optional-components.md) — Local GPU tools setup
+- [Toolkit Development](_internal/ROADMAP.md) — Roadmap, backlog, changelog
 
 ## Video Workflow
 

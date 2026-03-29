@@ -436,6 +436,7 @@ import { lightLeak } from '../../../lib/transitions/presentations/light-leak';
 | `npm run render` fails | Make sure you're in the project dir, not toolkit root. Run `npm install` first |
 | "Cannot find module" in Remotion | Check import paths. Custom components use `../../../lib/` relative paths |
 | Cold start timeout on Modal | First call after idle takes 30-120s. Retry once — second call uses warm GPU |
+| SadTalker client timeout (long audio) | The client HTTP request can time out before Modal finishes. **Modal still uploads the result to R2.** Check `sadtalker/results/` in the `video-toolkit` R2 bucket for the output. Use `python3 -c "import boto3; ..."` with the R2 creds from `.env` to list and generate a presigned URL |
 
 ---
 

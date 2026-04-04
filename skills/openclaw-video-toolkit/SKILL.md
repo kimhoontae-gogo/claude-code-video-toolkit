@@ -37,9 +37,31 @@ python3 tools/music_gen.py --preset corporate-bg --duration 60 --output bg.mp3 -
 python3 tools/music_gen.py --preset corporate-bg --duration 60 --output bg.mp3
 ```
 
-Tools that support `--progress json`: `music_gen.py`, `qwen3_tts.py`, `flux2.py`, `upscale.py`, `sadtalker.py`, `image_edit.py`, `dewatermark.py`, `ltx2.py`.
+Tools that support `--progress json`: `music_gen.py`, `qwen3_tts.py`, `flux2.py`, `upscale.py`, `sadtalker.py`, `image_edit.py`, `dewatermark.py`, `ltx2.py`, `chain_video.py`.
 
 See the **Progress Reporting** section below for output format and stage definitions.
+
+## CRITICAL: Long-Running Tasks — Use yieldMs, Not background:true
+
+**Any tool command that takes more than 30 seconds MUST use `exec` with `yieldMs` so you can report progress to the user live.** This includes: batch FLUX generation, chain_video, SadTalker, music generation, and any multi-scene pipeline.
+
+```
+exec command:"cd ~/.openclaw/workspace/claude-code-video-toolkit && python3 tools/chain_video.py --output-dir /path/ --progress json ..." yieldMs:10000
+```
+
+**The polling loop:**
+1. `exec` with `yieldMs:10000` starts the command and returns control to you every 10 seconds
+2. Read the `--progress json` output — look for `"stage":"item"` (scene complete) or `"stage":"complete"` (all done)
+3. Report progress to the user ("Scene 05/30 complete, 17%")
+4. Poll again: `process action:poll sessionId:<id>`
+5. Repeat until `"stage":"complete"`
+
+**Why:** Your agent run ends when you finish responding. If you use `bash background:true`, you lose the ability to report progress — the user sees silence until they nudge you. With `yieldMs`, you stay in the loop.
+
+**NEVER do this:**
+- `bash background:true command:"long running thing"` then promise to "monitor" — you can't, your run ends
+- Break a batch into individual tool calls across separate messages — your run ends between each one
+- Promise to "continue autonomously" — you literally cannot without an external trigger
 
 ## Setup
 

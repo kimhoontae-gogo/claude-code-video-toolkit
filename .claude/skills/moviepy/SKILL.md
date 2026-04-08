@@ -19,7 +19,12 @@ The deeper principle is **trustworthy text**: any genre where text *has to* be r
 | One-off transformations on existing video files | Anything where the project lifecycle (planning → render) matters |
 | You want zero Node.js / no React mental overhead | You want hot-reload preview in Remotion Studio |
 
-A working reference for the patterns below lives at `projects/_lib/townhall_video.py` — read that file alongside this skill.
+Two runnable references for everything in this skill live in `examples/`:
+
+- **`examples/quick-spot/build.py`** — 15-second ad-style spot. Audio-anchored timeline, text overlay, optional VO + ducked music. Renders silent out of the box with zero external assets.
+- **`examples/data-viz-chart/build.py`** — animated time-series chart with deterministic title and source attribution. Demonstrates the matplotlib (data) + moviepy (trustworthy text) split.
+
+Both run with `python3 build.py` and produce a real `out.mp4` immediately. Read them alongside this skill — every pattern below is shown working there.
 
 ## The main use case: text on AI-generated video
 
@@ -108,7 +113,7 @@ def render_text_png(txt, size, hex_color, cache_dir="./text_cache"):
     return str(path)
 ```
 
-The full helper (with kwargs for bold, position, fades, and cleaner ergonomics) is at `projects/_lib/townhall_video.py:_render_text_png` — copy it rather than re-implementing.
+The full helper (with kwargs for bold, position, fades, and cleaner ergonomics) is in `examples/quick-spot/build.py` — copy it rather than re-implementing.
 
 ## Audio-anchored timeline pattern
 
@@ -239,7 +244,7 @@ final_audio = CompositeAudioClip([music] + vo)
 
 ## References
 
-- Working library: `projects/_lib/townhall_video.py`
-- Working examples: `projects/q2-townhall-longarm-ad/build.py`, `projects/q2-townhall-stars/build.py`
+- Runnable example — short ad-style spot: `examples/quick-spot/build.py`
+- Runnable example — data-viz with text overlay: `examples/data-viz-chart/build.py`
 - Audio-anchored timelines: `CLAUDE.md → Video Timing → Audio-Anchored Timelines`
 - Related skills: `ltx2`, `ffmpeg`, `remotion`

@@ -86,6 +86,10 @@ examples/*/node_modules/
 examples/*/.remotion/
 examples/*/out/
 
+# moviepy examples — auto-generated PIL text caches and intermediate renders
+examples/*/.text_cache/
+examples/*/chart_anim.mp4
+
 # Playwright recordings (can be large)
 playwright/output/*.mp4
 playwright/recordings/*.mp4

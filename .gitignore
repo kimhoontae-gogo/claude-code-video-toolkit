@@ -33,6 +33,9 @@ out/
 *.gif
 *.mov
 
+# But DO track the README banner assets
+!assets/banner/**
+
 # Remotion
 .remotion/
 

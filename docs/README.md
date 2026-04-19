@@ -10,6 +10,12 @@
 4. [agent/README.md](./agent/README.md)
 5. [architecture/README.md](./architecture/README.md)
 
+실험 히스토리 핵심 문서:
+
+1. [history/migration/experiment_journey.md](./history/migration/experiment_journey.md)
+2. [history/animatediff/scene_transition_milestone_plan.md](./history/animatediff/scene_transition_milestone_plan.md)
+3. [history/cogvideo/milestone1_reference_i2v_plan.md](./history/cogvideo/milestone1_reference_i2v_plan.md)
+
 기존 toolkit 사용 문서:
 
 1. [getting-started.md](./getting-started.md)
@@ -17,4 +23,3 @@
 3. [runpod-setup.md](./runpod-setup.md)
 4. [creating-templates.md](./creating-templates.md)
 5. [creating-brands.md](./creating-brands.md)
-

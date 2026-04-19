@@ -10,6 +10,12 @@
 2. 과거 실험 히스토리 이관
 3. 다음 마일스톤 계획 수립
 
+## 최근 반영 사항
+
+1. AnimateDiff 실험 문서 원문을 `docs/history/animatediff/`로 이관
+2. CogVideo 실험 문서 원문을 `docs/history/cogvideo/`로 이관
+3. 실험 전체 흐름 요약 문서 `docs/history/migration/experiment_journey.md` 추가
+
 ## 업데이트 규칙
 
 아래 항목이 변경되면 이 문서를 갱신한다.
@@ -17,4 +23,3 @@
 1. 실험 엔진 후보
 2. 실행/배포 방식
 3. 활성 마일스톤
-

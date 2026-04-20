@@ -192,6 +192,10 @@ def copy_tree(src: Path, dest: Path, force: bool, dry_run: bool) -> None:
     shutil.copytree(src, dest)
 
 
+def yaml_quote(value: str) -> str:
+    return json.dumps(value, ensure_ascii=False)
+
+
 def remove_dir(path: Path, dry_run: bool) -> bool:
     if not path.exists():
         return False
@@ -286,8 +290,8 @@ def command_wrapper_content(
     repo_name = repo_root.name
 
     return f"""---
-name: {command.name}
-description: Codex wrapper for Claude Code `/{command.name}` in `{repo_name}`. Use when the user wants: {command.description}
+name: {yaml_quote(command.name)}
+description: {yaml_quote(f"Codex wrapper for Claude Code `/{command.name}` in `{repo_name}`. Use when the user wants: {command.description}")}
 ---
 
 # /{command.name} for Codex
@@ -328,8 +332,8 @@ def overview_skill_content(
     commands = ", ".join(f"`/{name}`" for name in command_names)
     skills = ", ".join(f"`{name}`" for name in skill_names)
     return f"""---
-name: video-toolkit
-description: Codex entry skill for `{repo_name}`. Use when working in this repository and you need the Codex equivalents of the toolkit's Claude commands and skills.
+name: {yaml_quote("video-toolkit")}
+description: {yaml_quote(f"Codex entry skill for `{repo_name}`. Use when working in this repository and you need the Codex equivalents of the toolkit's Claude commands and skills.")}
 ---
 
 # Video Toolkit

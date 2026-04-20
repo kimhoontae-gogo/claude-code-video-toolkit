@@ -26,6 +26,62 @@ Then in Claude Code:
 
 **That's it.** `/setup` walks you through everything interactively — cloud GPU provider, file transfer, voice config. `/video` creates a project from a template and guides you through the whole workflow.
 
+## Using with Codex
+
+This toolkit is built around Claude Code assets in `.claude/` and `CLAUDE.md`, but it also ships an experimental migration script for Codex.
+
+```bash
+python3 scripts/migrate_to_codex.py --force
+```
+
+This does two things:
+
+1. Installs Codex skills into `~/.codex/skills`
+2. Appends or updates a generated Codex block in the repository root `AGENTS.md` from `CLAUDE.md`
+
+Resources created or updated by `python3 scripts/migrate_to_codex.py --force`:
+
+1. `~/.codex/skills/acestep/`
+2. `~/.codex/skills/elevenlabs/`
+3. `~/.codex/skills/ffmpeg/`
+4. `~/.codex/skills/frontend-design/`
+5. `~/.codex/skills/ltx2/`
+6. `~/.codex/skills/moviepy/`
+7. `~/.codex/skills/playwright-recording/`
+8. `~/.codex/skills/qwen-edit/`
+9. `~/.codex/skills/remotion/`
+10. `~/.codex/skills/remotion-best-practices/`
+11. `~/.codex/skills/runpod/`
+12. `~/.codex/skills/brand/`
+13. `~/.codex/skills/contribute/`
+14. `~/.codex/skills/design/`
+15. `~/.codex/skills/generate-voiceover/`
+16. `~/.codex/skills/record-demo/`
+17. `~/.codex/skills/redub/`
+18. `~/.codex/skills/scene-review/`
+19. `~/.codex/skills/setup/`
+20. `~/.codex/skills/skills/`
+21. `~/.codex/skills/template/`
+22. `~/.codex/skills/versions/`
+23. `~/.codex/skills/video/`
+24. `~/.codex/skills/video-toolkit/`
+25. `~/.codex/skills/voice-clone/`
+26. A generated Codex block inside `AGENTS.md` in the repository root
+
+Important:
+
+1. The migration script manages only a generated block inside the repository root `AGENTS.md`.
+2. Manual `AGENTS.md` content outside that block is preserved.
+3. The generated block is derived from `CLAUDE.md`, so changes to `CLAUDE.md` should be followed by `python3 scripts/migrate_to_codex.py --force`.
+
+To remove the installed Codex skills later:
+
+```bash
+python3 scripts/migrate_to_codex.py --reset
+```
+
+`--reset` removes the toolkit skills previously installed under `~/.codex/skills` and removes the generated Codex block from `AGENTS.md`. It does not delete other user skills and it does not remove the rest of `AGENTS.md`.
+
 **What's free:** The toolkit leans heavily on open-source AI models — voiceovers (Qwen3-TTS), image generation (FLUX.2), music (ACE-Step), and more. You deploy them to your own cloud GPU account and run them at cost. Cloudflare R2 has a generous free tier (10GB, zero egress), and Modal gives $30/month free compute on the Starter plan — more than enough for a few 5-minute videos a month.
 
 **Requirements:** [Node.js](https://nodejs.org/) 18+ and [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Python 3.9+ recommended for AI tools. FFmpeg optional.
